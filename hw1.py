@@ -189,7 +189,6 @@ print('Training: ', train_dataset.shape,train_labels.shape)
 print('Validation: ', valid_dataset.shape,valid_labels.shape)
 print('Testing: ', test_dataset.shape,test_labels.shape)
 
-
 def randomize(dataset,labels):
     permutation = np.random.permutation(labels.shape[0])
     shuffled_dataset = dataset[permutation,:,:]
@@ -199,3 +198,92 @@ def randomize(dataset,labels):
 train_dataset, train_labels = randomize(train_dataset, train_labels)
 valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
 test_dataset, test_labels = randomize(test_dataset, test_labels)
+
+pretty_labels = { 0: 'A', 1: 'B', 2: 'C',3: 'D',4: 'E',5: 'F',6: 'G',7: 'H',8: 'I',9: 'J'}
+
+def disp_sample_dataset(dataset,labels):
+    items = random.sample(range(len(labels)),8)
+    for i, item in enumerate(items):
+        plt.subplot(2,4,i+1)
+        plt.axis('off')
+        plt.title(pretty_labels[labels[item]])
+        plt.imshow(dataset[item])
+
+disp_sample_dataset(train_dataset,train_labels)
+disp_sample_dataset(valid_dataset,valid_labels)
+disp_sample_dataset(test_dataset,test_labels)
+
+pickle_file = 'notMNIST.pickle'
+
+try:
+    f = open(pickle_file,'wb')
+
+    save = {
+        'train_dataset' : train_dataset,
+        'train_labels' : train_labels,
+        'valid_dataset' : valid_dataset,
+        'valid_labels' : valid_labels,
+        'test_dataset' : test_dataset,
+        'test_labels' : test_labels
+        }
+    pickle.dump(save,f,pickle.HIGHEST_PROTOCOL)
+    f.close()
+
+except Exception as e:
+    print('Unable to save data to',pickle_file,':',e)
+    raise
+
+
+statinfo = os.stat(pickle_file)
+print("compress size",statinfo.st_size)
+
+def sanetize(dataset_1,dataset_2,labels_1):
+    dataset_hash_1 = np.array([hashlib.sha256(img).hexdigest() for img in dataset_1])
+    dataset_hash_2 = np.array([hashlib.sha256(img).hexdigest() for img in dataset_2])
+    overlap = []
+    for i, hash1 in enumerate(dataset_hash_1):
+        duplicates = np.where(dataset_hash_2 == hash1 )
+        if len(duplicates[0]):
+            overlap.append(i)
+    return np.delete(dataset_1,overlap,0),np.delete(labels_1,overlap,None)
+
+test_dataset_sanit, test_labels_sanit = sanetize(test_dataset,train_dataset, test_labels)
+print('Overlapping image from test removed :', len(test_dataset) - len(test_dataset_sanit))
+valid_dataset_sanit, valid_labels_sanit = sanetize(valid_dataset,train_dataset, valid_labels)
+print('Overlapping image from valid removed : ', len(valid_dataset) - len(valid_dataset_sanit))
+
+pickle_file_sanit = 'notMNIST_sanit.pickle'
+
+try:
+    f = open(pickle_file_sanit,'wb')
+    save = {
+        'train_dataset' : train_dataset,
+        'train_labels' : train_labels,
+        'valid_dataset' : valid_dataset_sanit,
+        'valid_labels' : valid_labels_sanit,
+        'test_dataset' : test_dataset_sanit,
+        'test_labels' : test_labels_sanit
+        }
+    pickle.dump(save,f,pickle.HIGHEST_PROTOCOL)
+    f.close()
+
+except Exception as e:
+    print('Unable to save data to',pickle_file_sanit, ':', e)
+    raise
+
+statinfo = os.stat(pickle_file_sanit)
+print('Compressed pickle sanit size:', statinfo.st_size)
+
+regr = LogisticRegression(solver='sag')
+X_test = test_dataset.reshape(test_dataset.shape[0], 28*28)
+y_test = test_labels
+
+sample_size = len(train_dataset)
+X_train = train_dataset[:sample_size].reshape(sample_size,784)
+y_train = train_labels[:sample_size]
+regr.fit(X_train,y_train)
+regr.score(X_test,y_test)
+
+
+
+

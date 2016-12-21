@@ -2,5 +2,6 @@
 *#
 .#*
 *.tar.gz
+*.pickle
 /notMNIST_large/*
 /notMNIST_small/*
