@@ -175,7 +175,7 @@ def merge_datasets(pickle_files, train_size, valid_size = 0 ):
 
     return valid_dataset,valid_labels,train_dataset,train_labels
 
-train_size = 300000
+train_size = 200000
 valid_size = 10000
 test_size = 10000
 
@@ -278,12 +278,10 @@ regr = LogisticRegression(solver='sag')
 X_test = test_dataset.reshape(test_dataset.shape[0], 28*28)
 y_test = test_labels
 
-sample_size = len(train_dataset)
+#sample_size = len(train_dataset)
+sample_size = 5000
 X_train = train_dataset[:sample_size].reshape(sample_size,784)
 y_train = train_labels[:sample_size]
 regr.fit(X_train,y_train)
-regr.score(X_test,y_test)
-
-
-
+print(regr.score(X_test,y_test))
 
