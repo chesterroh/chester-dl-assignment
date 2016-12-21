@@ -1,5 +1,11 @@
 # Udacity DL assignment
 
+# Dec-21
+
+Reconvened after long sleep period.... hit the road !!!
+randomize function finished...
+
+
 # Sep-20
 
 cont'd
