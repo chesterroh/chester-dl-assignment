@@ -2,9 +2,7 @@
 
 # Dec-21
 
-Reconvened after long sleep period.... hit the road !!!
-randomize function finished...
-
+assignment-1 copied, understood.... but not familiar yet... especially for hash function with duplicate removal
 
 # Sep-20
 
