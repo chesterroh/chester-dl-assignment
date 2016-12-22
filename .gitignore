@@ -3,5 +3,6 @@
 .#*
 *.tar.gz
 *.pickle
+*.pyc
 /notMNIST_large/*
 /notMNIST_small/*
