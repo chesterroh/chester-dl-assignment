@@ -39,4 +39,3 @@ print('Training set tensor',train_dataset.shape,train_labels.shape)
 print('Valid set tensor',valid_dataset.shape,valid_labels.shape)
 print('Test set tensor',test_dataset.shape,test_labels.shape)
 
-

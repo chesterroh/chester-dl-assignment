@@ -6,3 +6,4 @@
 *.pyc
 /notMNIST_large/*
 /notMNIST_small/*
+/MNIST_data/
