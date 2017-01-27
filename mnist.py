@@ -8,7 +8,7 @@ from six.moves import range
 
 class Dataset(object):
     def __init__(self,images,labels,one_hot=False):
-        self.images = images
+        self.images = images.astype(np.float32)
         if one_hot:
             self.labels = self.one_hot_transform(labels)
         else:
