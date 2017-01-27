@@ -1,5 +1,10 @@
 # Udacity DL assignment
 
+# Jan 24~27
+
+refactored all data pre-processing code
+adding 2-layer perceptron, convolutional layer
+
 # Dec-21
 
 assignment-1 copied, understood.... but not familiar yet... especially for hash function with duplicate removal

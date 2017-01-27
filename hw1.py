@@ -8,6 +8,7 @@ import os
 import sys
 import tarfile
 from scipy import ndimage
+
 from sklearn.linear_model import LogisticRegression
 from six.moves.urllib.request import urlretrieve
 from six.moves import cPickle as pickle
@@ -89,13 +90,13 @@ def load_letter(folder,min_num_images):
         except IOError as e:
             print('could not read:' , image_file, ':', e, ' it\'s okay just skipping.. ')
     num_images = image_index
-    dataset = dataset[0:num_images,:,:]
+    final_dataset = dataset[0:num_images,:,:]
     if num_images < min_num_images:
         raise Exception('Main fewer images than expected %d < %d ' % ( num_images,min_num_images))
-    print('Full dataset tensor:' , dataset.shape)
-    print('Mean : ', np.mean(dataset))
-    print('Standard deviation:', np.std(dataset))
-    return dataset
+    print('Full dataset tensor:' , final_dataset.shape)
+    print('Mean : ', np.mean(final_dataset))
+    print('Standard deviation:', np.std(final_dataset))
+    return final_dataset
 
 def maybe_pickle(data_folders,min_num_images_per_class,force=False):
     dataset_names = []
@@ -114,8 +115,8 @@ def maybe_pickle(data_folders,min_num_images_per_class,force=False):
                 print('unable to save data to', set_filename, ':', e)
     return dataset_names
 
-train_datasets = maybe_pickle(train_folders,45000)
-test_datasets = maybe_pickle(test_folders,1800)
+train_datasets = maybe_pickle(train_folders,52900)
+test_datasets = maybe_pickle(test_folders,1870)
 
 def disp_number_images(data_folders):
     for folder in data_folders:
@@ -130,7 +131,6 @@ def disp_number_images(data_folders):
 
 disp_number_images(train_folders)
 disp_number_images(test_folders)
-
 
 def make_arrays(nb_rows, img_size):
     if nb_rows:
@@ -175,9 +175,9 @@ def merge_datasets(pickle_files, train_size, valid_size = 0 ):
 
     return valid_dataset,valid_labels,train_dataset,train_labels
 
-train_size = 200000
-valid_size = 10000
-test_size = 10000
+train_size = 480000
+valid_size = 20000
+test_size = 18000
 
 print(train_datasets)
 print(test_datasets)
@@ -274,6 +274,7 @@ except Exception as e:
 statinfo = os.stat(pickle_file_sanit)
 print('Compressed pickle sanit size:', statinfo.st_size)
 
+'''
 regr = LogisticRegression(solver='sag')
 X_test = test_dataset.reshape(test_dataset.shape[0], 28*28)
 y_test = test_labels
@@ -285,3 +286,4 @@ y_train = train_labels[:sample_size]
 regr.fit(X_train,y_train)
 print(regr.score(X_test,y_test))
 
+'''
