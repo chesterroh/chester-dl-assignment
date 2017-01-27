@@ -62,13 +62,3 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
 print(sess.run(accuracy, feed_dict = { x: np.reshape(mnist.test_data.images,(-1,784)), y_: mnist.test_data.labels, keep_prob: 0.75}))
 
 sess.close()
-
-
-
-
-    
-
-
-
-
-
