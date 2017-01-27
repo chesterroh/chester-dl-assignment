@@ -1,5 +1,9 @@
 # Udacity DL assignment
 
+# Jan 27
+
+AI: increasing the representation power + batch normalization with understanding data
+
 # Jan 26
 
 mnist ( A ~ J ) training data pre-processing , 5-layer fc, 2-layer convolutional model has been tested with dropout...       2-layer conv test accuracy is around 95.7% ...  increasing the representational power of conv-layer would help get more accuracy. tomorrow's job.
