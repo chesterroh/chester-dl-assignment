@@ -2,7 +2,8 @@
 
 # Feb 4
 
-tf1 training structure modified, tf2 training structure modified, tf3 convolution structure modified 
+- tf1 training structure modified, tf2 training structure modified, tf3 convolution structure modified
+- tf4.py added with different convolution structure 
 
 # Jan 27
 
