@@ -1,5 +1,9 @@
 # Udacity DL assignment
 
+# Feb 4
+
+tf1 training structure modified, tf2 training structure modified, tf3 convolution structure modified 
+
 # Jan 27
 
 AI: increasing the representation power + batch normalization with understanding data
