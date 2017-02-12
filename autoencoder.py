@@ -16,7 +16,6 @@ batch_size = 100
 total_batch = int(mnist.train_data.data_length/batch_size)
 train_iteration = 5
 
-
 sess = tf.InteractiveSession()
 
 x = tf.placeholder(tf.float32,shape=[None,784])
@@ -64,8 +63,8 @@ for iteration in range(train_iteration):
 
     for i in range(total_batch):
         batch = mnist.train_data.next_batch(batch_size)
-        xs = batch[0]
-        ys = batch[0]
+        xs = batch[0].reshape(-1,784)
+
         _, c = sess.run((train_step,cost),feed_dict = { x: xs })
 
         if i % 1000 == 0:
