@@ -3,6 +3,7 @@
 from mnist import MnistData
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 pickle_file = 'notMNIST_sanit.pickle'
 mnist = MnistData(pickle_file,one_hot=True)
@@ -11,7 +12,9 @@ K = 1000
 L = 500
 M = 250
 
-learning_rate = 1e-4
+num_samples = 10
+
+learning_rate = 5e-5
 batch_size = 100
 total_batch = int(mnist.train_data.data_length/batch_size)
 train_iteration = 5
@@ -68,6 +71,19 @@ for iteration in range(train_iteration):
         _, c = sess.run((train_step,cost),feed_dict = { x: xs })
 
         if i % 1000 == 0:
-            print("Epoch",i,"cost",c)
+            print("Epoch %s, cost %g" % (i,c))
 
+# test autoencoder
+
+test_feed = mnist.test_data.images[:num_samples].reshape(-1,784)
+
+en_decode = sess.run( output, feed_dict = { x: test_feed } )
+
+f,a = plt.subplots(2,10,figsize=(10,2))
+for i in range(num_samples):
+    a[0][i].imshow(np.reshape(mnist.test_data.images[i],(28,28)))
+    a[1][i].imshow(np.reshape(en_decode[i],(28,28)))
+f.show()
+plt.draw()
+plt.waitforbuttonpress()
 
