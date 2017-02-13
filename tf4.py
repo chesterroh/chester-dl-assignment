@@ -80,7 +80,7 @@ with tf.name_scope("train"):
 # merge all the summaries
 merged = tf.summary.merge_all()
 train_writer = tf.train.SummaryWriter("./summary/train",sess.graph)
-test_writer = tf.trainSummaryWriter("./summary/test",sess.graph)
+test_writer = tf.train.SummaryWriter("./summary/test",sess.graph)
     
 sess.run(tf.global_variables_initializer())
 
