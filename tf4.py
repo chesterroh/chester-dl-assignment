@@ -68,7 +68,7 @@ with tf.name_scope("layer-4-fc"):
     y_conv = tf.matmul(h_fc1_drop,W_fc2) + b_fc2
 
 with tf.name_scope("cross_entropy"):
-    cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y_conv,y_))
+    cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_conf, labels=y_))
     tf.summary.scalar('cross_entropy',cross_entropy)
 
 with tf.name_scope("train"):
@@ -79,8 +79,8 @@ with tf.name_scope("train"):
 
 # merge all the summaries
 merged = tf.summary.merge_all()
-train_writer = tf.train.SummaryWriter("./summary/train",sess.graph)
-test_writer = tf.train.SummaryWriter("./summary/test",sess.graph)
+train_writer = tf.summary.FileWriter("./summary/train",sess.graph)
+test_writer = tf.summary.FileWriter("./summary/test",sess.graph)
     
 sess.run(tf.global_variables_initializer())
 
