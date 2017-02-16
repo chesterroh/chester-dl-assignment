@@ -9,5 +9,5 @@
 /notMNIST_large/*
 /notMNIST_small/*
 /MNIST_data/
-notMNIST*
+*__pycache__*
 *summary*
