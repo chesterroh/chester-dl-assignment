@@ -68,7 +68,7 @@ with tf.name_scope("layer-4-fc"):
     y_conv = tf.matmul(h_fc1_drop,W_fc2) + b_fc2
 
 with tf.name_scope("cross_entropy"):
-    cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_conf, labels=y_))
+    cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_conv, labels=y_))
     tf.summary.scalar('cross_entropy',cross_entropy)
 
 with tf.name_scope("train"):
