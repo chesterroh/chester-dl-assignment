@@ -5,7 +5,9 @@
 *.tar.gz
 *.pickle
 *.pyc
+*.txt
 /notMNIST_large/*
 /notMNIST_small/*
 /MNIST_data/
+notMNIST*
 *summary*
