@@ -11,3 +11,4 @@
 /MNIST_data/
 *__pycache__*
 *summary*
+.ipynb_checkpoints
