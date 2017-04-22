@@ -1,5 +1,13 @@
 # Udacity DL assignment
 
+# Apr 22
+
+* char-rnn tutorial 
+
+# Apr 21
+
+* pixel level domain transfer / fashion search paper read ---> (AI) abridgement doc
+
 # Feb 4
 
 - tf1 training structure modified, tf2 training structure modified, tf3 convolution structure modified
