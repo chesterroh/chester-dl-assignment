@@ -1,4 +1,16 @@
-# Udacity DL assignment
+# Chester DL assignment
+
+
+# May 11
+
+* simple-1D GAN with Keras copy-implementation
+* Keras syntax learning + simple mnist convnet classifier 
+
+
+# May 10 
+
+* restart with simple-1D GAN
+
 
 # Apr 22
 
